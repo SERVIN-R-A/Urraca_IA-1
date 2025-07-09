@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Urraca IA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 Bienvenido a Urraca IA</h1>
+    <p>Tu asistente inteligente conectado a internet.</p>
+    <form id="formulario">
+      <input type="text" id="mensaje" placeholder="Escribe algo..." />
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="respuesta"></div>
+    <footer>
+      <p>Desarrollado por <strong>SERVIN</strong> · <a href="mailto:antonioservinrodriguez666@gmail.com">Contacto</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById("formulario");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const mensaje = document.getElementById("mensaje").value;
+      const res = await fetch("/mensaje", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({mensaje: mensaje, usuario: "antonio"})
+      });
+      const data = await res.json();
+      document.getElementById("respuesta").innerText = data.respuesta;
+    });
+  </script>
+</body>
+</html>
