@@ -1,0 +1,4 @@
+flask
+wikipedia
+deep-translator
+PyPDF2
